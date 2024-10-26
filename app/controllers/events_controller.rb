@@ -2,6 +2,7 @@ class EventsController < ApplicationController
   def index
     if user_signed_in?
       @events = current_user.events
+      current_time = Time
     end
   end
 
