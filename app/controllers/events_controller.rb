@@ -2,7 +2,6 @@ class EventsController < ApplicationController
   def index
     if user_signed_in?
       @events = current_user.events
-      current_time = Time
     end
   end
 
@@ -13,6 +12,7 @@ class EventsController < ApplicationController
   def create
     @event = current_user.events.build(event_params)
     if @event.save
+      EventNotificationJob.set(wait_until: @event.strike).perform_later(@event)
       redirect_to root_path, notice: "Event was successfully created."
     else
       render :new
