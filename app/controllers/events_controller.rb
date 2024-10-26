@@ -21,6 +21,6 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:title, :desc, :strike, :repeat) # Replace with actual event attributes
+    params.require(:event).permit(:name, :desc, :strike, :repeat) # Replace with actual event attributes
   end
 end
