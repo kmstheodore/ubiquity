@@ -3,6 +3,6 @@ class EventMailer < ApplicationMailer
 
   def event_created
     @event = params[:event]
-    mail(to: @user.user_id.email, subject: "Event created")
+    mail(to: @event.user.email, subject: "Event created")
   end
 end
