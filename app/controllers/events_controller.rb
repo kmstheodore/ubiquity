@@ -12,6 +12,7 @@ class EventsController < ApplicationController
   def create
     @event = current_user.events.build(event_params)
     if @event.save
+      EventMailer.with(event: @event).event_created.deliver_now
       redirect_to root_path, notice: "Event was successfully created."
     else
       render :new
